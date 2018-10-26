@@ -88,9 +88,7 @@ function keyboard() {
             
         case 'capslock':
         case 'capslock active':
-        console.log(this);
             capsLock(this);
-            
             break;
 
         case 'left-shift':
