@@ -52,9 +52,9 @@ function showDate(){
 
 showDate();
 
-for(var i = 0; i < keys.length; i++) {
-    keys[i].addEventListener('click', keyboard);
-}
+keys.forEach(key => {
+    key.addEventListener('click', keyboard);
+});
 
 /**
  * Controla todas las teclas del teclado y sus funciones
@@ -88,7 +88,9 @@ function keyboard() {
             
         case 'capslock':
         case 'capslock active':
-            capsLock();
+        console.log(this);
+            capsLock(this);
+            
             break;
 
         case 'left-shift':
@@ -143,16 +145,16 @@ function lowerCase() {
  * @version 1.0
  * @param
  */
-function capsLock() {
+function capsLock(key) {
     if (capslock === false) {
         upperCase();
         capslock = true;
-        this.classList.add('active');
+        key.classList.add('active');
         document.querySelector('.led').style.backgroundColor = '#40ff00';
     } else if (capslock === true) {
         lowerCase();
         capslock = false;
-        this.classList.remove('active');
+        key.classList.remove('active');
         document.querySelector('.led').style.backgroundColor = '#afafaf';
     }
 }
