@@ -13,6 +13,7 @@ const weekdayArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Fri
  * @param
  */
 function showDate(){ 
+    //Cogemos todos los parametros que necesitamos mostrar del objeto Date
     const date = new Date();
     let hour = date.getHours();
     let minute = date.getMinutes();
@@ -23,6 +24,7 @@ function showDate(){
     const day = date.getUTCDate();
     let suffix = '';
 
+    // Si el día es 1, 2 o 3 se le añade un sufijo
     if (day === 1) {
         suffix = 'st';
     } else if (day === 2) {
@@ -33,6 +35,7 @@ function showDate(){
         suffix = 'th';
     }
 
+    // Si algún valor es menor a 10 le añadimos un 0 delante
     if (hour < 10) {
         hour = `0${hour}`;
     }
@@ -43,6 +46,7 @@ function showDate(){
         second = `0${second}`;
     }
 
+    // Construimos el mensaje que se mostrara en la pantalla
     const output = `${weekdayArr[dayOfWeek]} ${day}${suffix}, ${monthsArr[month]} ${year}, ${hour}:${minute}:${second} ` ;
 
     document.querySelector('.date').innerHTML = output;
@@ -52,6 +56,7 @@ function showDate(){
 
 showDate();
 
+// Creamos un evento click a todas las teclas y una vez se hace click llamamos a la función keyboard.
 keys.forEach(key => {
     key.addEventListener('click', keyboard);
 });
@@ -64,10 +69,12 @@ keys.forEach(key => {
  * @param
  */
 function keyboard() {
+    // Switch para controla el tipo de tecla que se clica
     switch (this.className) {
         case 'letter':
         case 'symbol':
             text.value += this.innerHTML;
+            // Controla si el shift ha sido pulsado
             if (shift && !capslock) {
                 lowerCase();
                 shift = false; 
@@ -88,6 +95,7 @@ function keyboard() {
             
         case 'capslock':
         case 'capslock active':
+            // Llamamos a la función capsLock pasandole como parametro el objeto que genera al pulsar la tecla para después controlar el led
             capsLock(this);
             break;
 
@@ -141,7 +149,7 @@ function lowerCase() {
  *
  * @author Daniel Domínguez Zamorano
  * @version 1.0
- * @param
+ * @param {object} key
  */
 function capsLock(key) {
     if (capslock === false) {
